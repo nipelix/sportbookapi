@@ -12,4 +12,4 @@ COPY . ./
 RUN npm install --legacy-peer-deps
 
 # Serve the app
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:prod"]
