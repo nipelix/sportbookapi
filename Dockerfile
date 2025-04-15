@@ -11,8 +11,5 @@ COPY . ./
 # Install packages
 RUN npm install --legacy-peer-deps
 
-# Creates a "dist" folder with the production build
-RUN npm run build
-
 # Serve the app
 CMD ["npm", "run", "start"]
