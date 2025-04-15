@@ -92,7 +92,38 @@ router.post('/refresh-token', async (req, res) => {
     }
 });
 
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+
+router.post('/create-user',body('Username').notEmpty().withMessage('api.username_required'),
+    body('Password').notEmpty().withMessage('api.password_required').isLength({ min: 4 }).withMessage('api.min_4_password'),
+	function(req,res){
+		 const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                result: false,
+                message: errors.array()
+            });
+        }
+
+	 User.forge(req.body).save().then((e) => {
+			return res.status(200).json({
+                    result: true,
+                    data: e
+                });
+	}).catch((e) => {
+        return res.status(400).json({
+            result: false,
+                message: [
+                    {
+                       msg: e
+                    }
+                ]
+        });
+    })
+
+})
+
+
 router.post('/login',
     body('username').notEmpty().withMessage('api.username_required'),
     body('password').notEmpty().withMessage('api.password_required').isLength({ min: 4 }).withMessage('api.min_4_password'),
@@ -105,7 +136,7 @@ router.post('/login',
             });
         }
 
-      // await delay(50000)
+    
         const { username, password } = req.body;
 
         User.query(function (qb) {
@@ -198,5 +229,7 @@ router.post('/login',
         })
 
 });
+
+
 
 module.exports = router;
