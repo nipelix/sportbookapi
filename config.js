@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const config = {
   baseUrl: process.env.BASE_URL,
+  source: process.env.SOURCE,
   database: {
     client: process.env.DB_CLIENT,
     connection: {
