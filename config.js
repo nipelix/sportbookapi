@@ -1,29 +1,33 @@
+require("dotenv").config();
+
 const config = {
-    baseUrl: 'http://148.251.53.243:3001/',
-    database: {
-        client: 'mysql',
-        connection: {
-            host     : 'localhost',
-            user     : 'root',
-            password : '',
-            database : 'sport_book',
-            charset  : 'utf8'
-        }
+  baseUrl: process.env.BASE_URL,
+  source: process.env.SOURCE,
+  database: {
+    client: process.env.DB_CLIENT,
+    connection: {
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      charset: process.env.DB_CHARSET,
     },
-    jwt: {
-        privateKey: "MIIJJgIBAAKCAgBZ2NZWmbcJPPyH_Kmz60tina6h5UqQggq1VBzxXNkB2LURGXcOwsExB4Q8GRcc_PuPgI2hbtXdGFg0hPVi!yzAuJRpQxdjMlEKR2_X1fKBpGdz0QTmqSLuyJwdqFavRbBgOdrdNN78kIlEDalzznKlyQfNyYUc3zmvinAhhjM?w1JXqzWwIw8AnjPxmd62268juVwb!foJGH8JLwpp1WpN1vu1wxFmnKds7DG94dOWgR1Fxj0XNH",
-        base: {
-            algorithm: 'HS256',
-            expiresIn: '1d',
-            issuer: 'Sinek2',
-            audience: 'sinek2'
-        },
-        refresh:{
-            algorithm: 'HS256',
-            expiresIn: '7d',
-            issuer: 'Sinek2',
-            audience: 'sinek2'
-        }
-    }
-}
+  },
+  jwt: {
+    privateKey: process.env.JWT_PRIVATE_KEY,
+    base: {
+      algorithm: process.env.JWT_BASE_ALGORITHM,
+      expiresIn: process.env.JWT_BASE_EXPIRES,
+      issuer: process.env.JWT_BASE_ISSUER,
+      audience: process.env.JWT_BASE_AUDIENCE,
+    },
+    refresh: {
+      algorithm: process.env.JWT_REFRESH_ALGORITHM,
+      expiresIn: process.env.JWT_REFRESH_EXPIRES,
+      issuer: process.env.JWT_REFRESH_ISSUER,
+      audience: process.env.JWT_REFRESH_AUDIENCE,
+    },
+  },
+};
+
 module.exports = config;
